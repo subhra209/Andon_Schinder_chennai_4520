@@ -1,0 +1,2 @@
+wait 2 sec
+aa FA 01 A0 5B bb

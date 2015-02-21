@@ -1,0 +1,27 @@
+wait 5 sec
+  AA  FA  01  A0  5B  BB
+
+wait 1 sec
+  AA  FA  01  A1  5A  BB
+
+wait 1 sec 
+  AA  FA  01  82  79  BB
+
+wait 2 sec
+  AA  FA  05  92  33  31  33  31  6D  BB
+
+wait 1 sec
+  AA  FA  01  81  7A  BB
+
+wait 1 sec
+  AA  FA  05  91  31  30  30  33  6C  BB
+
+wait 1 sec
+  AA  FA  01  80  7B  BB
+
+wait 1 sec
+  AA  FA  01  83  78  BB
+
+wait 1 sec
+  AA  FA  02  93  05  6E  BB
+
