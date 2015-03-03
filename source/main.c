@@ -179,7 +179,7 @@ void main(void)
     {
 
 
-		if( heartBeatCount >= 200)
+		if( heartBeatCount >= 10)
 		{
 			HB_task();
 			heartBeatCount = 0;

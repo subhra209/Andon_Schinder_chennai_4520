@@ -86,8 +86,8 @@ void UI_init(void)
 
 	clearUIBuffer();
 	clearUIInput();
-	ui.state = UI_STATION;
-	setUImsg(UI_MSG_STATION);
+	ui.state = UI_ISSUE;
+	setUImsg(UI_MSG_ISSUE);
 
 
 }
@@ -333,58 +333,68 @@ void UI_task(void)
 	
 		case UI_ISSUE:
 
-		if( keypressed == '\x08')
+		if( keypressed == '0')
 		{
-			setUImsg(UI_MSG_STATION);
-			clearUIBuffer();
-			clearUIInput();
-			ui.state = UI_STATION;
-
+			if(ui.bufferIndex == 0 )
+			{
+/*
+				IAS_getOpenIssue(&openIssue);
+				if(openIssue.ID != - 1)
+				{
+					showUImsg(openIssue.tag);
+					clearUIBuffer();
+					clearUIInput();
+					ui.state= UI_ISSUE_ACK;
+				}
+*/
+		//	IAS_getOpenIssue(&openIssue);
+				IAS_acknowledgeIssues(openIssue.ID);
+			//	openIssue.ID = -1;
+				setUImsg(UI_MSG_ISSUE);
+				clearUIBuffer();
+				clearUIInput();
+				ui.state = UI_ISSUE;
+			}
 		}
-
-		switch( keypressed )
+		else
 		{
-
-			case '1':
-			putUImsg(UI_MSG_BREAKDOWN);
-
-			ui.input[ui.inputIndex]  = '1';
+			ui.input[ui.inputIndex]  = '0';
 			ui.inputIndex++;
-
-			ui.state = UI_BRK_QUA_MS;
-			break;
-
-
-			case '2':
-			putUImsg(UI_MSG_QUALITY);
-
-			ui.input[ui.inputIndex]  = '2';
-			ui.inputIndex++;
-
-			ui.state = UI_BRK_QUA_MS;
-			break;
-
-			case '3':
-			putUImsg(UI_MSG_MATERIAL_SHORTAGE);
-
-			ui.input[ui.inputIndex]   = '3';
-			ui.inputIndex++;
-
-			ui.state = UI_BRK_QUA_MS;
-			break;
-
-			case '4':
-			putUImsg(UI_MSG_OTHERS);
-
-			ui.input[ui.inputIndex]   = '4';
-			ui.inputIndex++;
-
-			ui.state = UI_BRK_QUA_MS;
-			break;
-
-
-			default:
-			break;
+			switch( keypressed )
+			{
+	
+				case '1':
+				putUImsg(UI_MSG_BREAKDOWN);
+	
+				ui.input[ui.inputIndex]  = '1';
+				ui.inputIndex++;
+	
+				ui.state = UI_BRK_QUA_MS;
+				break;
+	
+	
+				case '2':
+				putUImsg(UI_MSG_QUALITY);
+	
+				ui.input[ui.inputIndex]  = '2';
+				ui.inputIndex++;
+	
+				ui.state = UI_BRK_QUA_MS;
+				break;
+	
+				case '3':
+				putUImsg(UI_MSG_MATERIAL_SHORTAGE);
+	
+				ui.input[ui.inputIndex]   = '3';
+				ui.inputIndex++;
+	
+				ui.state = UI_BRK_QUA_MS;
+				break;
+	
+	
+				default:
+				break;
+			}	
 
 		}
 		break;
@@ -397,12 +407,13 @@ void UI_task(void)
 			setUImsg(UI_MSG_ISSUE);
 			clearUIBuffer();
 			ui.state = UI_ISSUE;
-			ui.inputIndex = 2;
+			ui.inputIndex = ui.inputIndex - 1 ;
 		}
 
 		else if( keypressed == '\x0A')
 		{
-			if( ui.input[2] == '3' )
+/*
+			if( ui.input[ui.inputIndex - 1] == '3' )
 			{
 				setUImsg(UI_MSG_PART_NO);
 				clearUIBuffer();
@@ -410,15 +421,16 @@ void UI_task(void)
 			}
 			else
 			{
+*/
 
 					getData();
 					IAS_raiseIssues( ui.input);
-					setUImsg(UI_MSG_STATION);
+					setUImsg(UI_MSG_ISSUE);
 					clearUIBuffer();
 					clearUIInput();
-					ui.state = UI_STATION;
+					ui.state = UI_ISSUE;
 			
-			}
+		//	}
 		}
 
 		break;
@@ -438,7 +450,7 @@ void UI_task(void)
 				setUImsg(UI_MSG_ISSUE);
 				clearUIBuffer();
 				ui.state = UI_ISSUE;
-				ui.inputIndex = 2;
+				ui.inputIndex = 1;
 			}
 
 		}
@@ -448,10 +460,10 @@ void UI_task(void)
 			{
 				getData();
 				IAS_raiseIssues( ui.input);
-				setUImsg(UI_MSG_STATION);
+				setUImsg(UI_MSG_ISSUE);
 				clearUIBuffer();
 				clearUIInput();
-				ui.state = UI_STATION;
+				ui.state = UI_ISSUE;
 			}
 		}
 
@@ -488,7 +500,7 @@ void UI_task(void)
 		break;
 
 		case UI_ISSUE_ACK:
-
+/*
 		if( keypressed == '0')
 		{
 			IAS_getOpenIssue(&openIssue);
@@ -508,14 +520,16 @@ void UI_task(void)
 
 		else if( keypressed == '\x0A')
 		{
+*/
+			IAS_getOpenIssue(&openIssue);
 			IAS_acknowledgeIssues(openIssue.ID);
 			openIssue.ID = -1;
-			setUImsg(UI_MSG_STATION);
+			setUImsg(UI_MSG_ISSUE);
 			clearUIBuffer();
 			clearUIInput();
-			ui.state = UI_STATION;
+			ui.state = UI_ISSUE;
 
-		}
+//		}
 
 		break;
 
@@ -797,8 +811,7 @@ UINT8 mapKey(UINT8 scancode, UINT8 duration)
 		if((keypressed != '0')&& 
 			(keypressed != '1') && 
 			(keypressed != '2') && 
-			(keypressed != '3') && 
-			(keypressed != '4') && 
+			(keypressed != '3') &&  
 			(keypressed != '\x08') && 
 			(keypressed !='\x0A')  )
 			keypressed = 0xFF;

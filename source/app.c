@@ -832,21 +832,22 @@ void IAS_acknowledgeIssues(UINT8 ID)
 	UINT8 i;
 	ias.issues[ID].ackStatus = 0;
 
-	updateLog(ias.issues[ID].data);
+//	updateLog(ias.issues[ID].data);
 
 	
 
 
-	Write_b_eep((ID*ISSUE_ENTRY_SIZE)+ISSUE_ACKSTATUS, ias.issues[ID].ackStatus);
-	Busy_eep();
-	ClrWdt();
+//	Write_b_eep((ID*ISSUE_ENTRY_SIZE)+ISSUE_ACKSTATUS, ias.issues[ID].ackStatus);
+//	Busy_eep();
+//	ClrWdt();
 
 	//IAS_updateIssues(ias.issues[ID].data);
 
 	for( i = 0 ; i < MAX_ISSUES ;i++)
 	{
 		if( ias.issues[i].ackStatus == 1)
-			return;
+			ias.issues[i].ackStatus = 0 ;
+			//return;
 	}
 	BUZZER = 0;
 			

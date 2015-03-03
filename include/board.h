@@ -85,12 +85,12 @@
 	#define		LCD_D5_DIR				TRISDbits.TRISD5
 	#define		LCD_D4					PORTDbits.RD4			
 	#define		LCD_D4_DIR				TRISDbits.TRISD4
-	#define		LCD_E					PORTDbits.RD3 			
-	#define		LCD_E_DIR				TRISDbits.TRISD3
+	#define		LCD_E					PORTDbits.RD1 			
+	#define		LCD_E_DIR				TRISDbits.TRISD1
 	#define		LCD_RW					PORTDbits.RD2 			
 	#define		LCD_RW_DIR				TRISDbits.TRISD2
-	#define		LCD_RS					PORTDbits.RD1			
-	#define		LCD_RS_DIR				TRISDbits.TRISD1
+	#define		LCD_RS					PORTDbits.RD3		
+	#define		LCD_RS_DIR				TRISDbits.TRISD3
 
 
 // Buzzer O/P
