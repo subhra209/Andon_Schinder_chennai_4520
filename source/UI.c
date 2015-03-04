@@ -356,9 +356,10 @@ void UI_task(void)
 				ui.state = UI_ISSUE;
 			}
 		}
+/*
 		else if( keypressed == '\x08')
 		{
-/*
+
 			if(ui.bufferIndex > 0 )
 			{
 				LCD_putChar(keypressed);
@@ -368,7 +369,7 @@ void UI_task(void)
 			}
 			else 
 			{
-*/
+
 			if(ui.bufferIndex == 0 )
 			{
 				IAS_getAcknowledgedIssue(&ackIssue);
@@ -382,6 +383,7 @@ void UI_task(void)
 			}
 
 		}
+*/
 		else
 		{
 			ui.input[ui.inputIndex]  = '0';

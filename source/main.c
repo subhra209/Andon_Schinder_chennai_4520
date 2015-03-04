@@ -179,13 +179,13 @@ void main(void)
     {
 
 
-		if( heartBeatCount >= 100)
+		if( heartBeatCount >= 25)
 		{
 			HB_task();
 			heartBeatCount = 0;
 		}
 
-		if( keypadUpdateCount >= 10 )
+		if( keypadUpdateCount >= 3 )
 		{
 			UpdateKeypadTask();
 			keypadUpdateCount = 0;

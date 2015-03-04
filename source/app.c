@@ -600,9 +600,15 @@ void IAS_raiseIssues(far UINT8* data)
 
 	for(i = 0; i < MAX_ISSUES; i++)										//for each issue
 		if(ias.issues[i].state != ISSUE_RESOLVED )						//if it is raised
-			if(strcmp((INT8*)data,(INT8 *)ias.issues[i].data) == 0)		//if input matches				
+			if(strcmp((INT8*)data,(INT8 *)ias.issues[i].data) == 0)		//if input matches
+			{
+			/*
+				if(ias.issues[i].ackStatus == 1) 						//check whether acknowledged
 					return;												//do nothing
-
+			*/
+					resolveIssue( *data);
+					return;
+			}
 
 	for( i = 0 ; i < MAX_ISSUES ;i++)
 	{
@@ -654,13 +660,13 @@ void resolveIssue(far UINT8* data)
 	}
 
 
-
+/*
 	for(i = 0; i < MAX_ISSUES; i++)										//for each issue
 		if(ias.issues[i].state != ISSUE_RESOLVED )						//if it is raised
 			if(strcmp((INT8*)data,(INT8 *)ias.issues[i].data) == 0)		//if input matches
 				if(ias.issues[i].ackStatus == 1) 						//check whether acknowledged
 					return;												//if not return
-
+*/
 
 	switch(ias.state)
 	{
@@ -673,7 +679,7 @@ void resolveIssue(far UINT8* data)
 			issueIndex = issueResolved(data);
 			if(  issueIndex != -1)
 			{
-				//updateLog(data);
+				updateLog(data);
 				memset(ias.issues[issueIndex].data , 0 , MAX_KEYPAD_ENTRIES + 1);
 							
 				ClrWdt();
@@ -687,7 +693,7 @@ void resolveIssue(far UINT8* data)
 					ClrWdt();
 				}
 				
-				
+			//	updateLog(data);
 				if(ias.issues_raised == 0)
 				{
 					ias.state = ISSUE_RESOLVED;
@@ -701,7 +707,7 @@ void resolveIssue(far UINT8* data)
 		
 	
 
-
+	
 		break;
 
 		case ISSUE_CRITICAL:
@@ -709,9 +715,9 @@ void resolveIssue(far UINT8* data)
 		for(i = 0; i< MAX_ISSUES ; i++)
 		{
 			issueIndex = issueResolved(data);
-			if(  issueIndex != -1)
-			{
-				//updateLog(data);
+		//	if(  issueIndex != -1)
+		//	{
+				updateLog(data);
 				memset(ias.issues[issueIndex].data , 0 , MAX_KEYPAD_ENTRIES + 1);
 							
 				ClrWdt();
@@ -725,7 +731,7 @@ void resolveIssue(far UINT8* data)
 					ClrWdt();
 				}
 				
-				
+			//	updateLog(data);
 				if(ias.issues_critical == 0)
 				{
 				   	if(ias.issues_raised == 0)
@@ -755,7 +761,7 @@ void resolveIssue(far UINT8* data)
 				
      			}                            
 				return;
-			}
+		//	}
 		}
 
 		break;
@@ -764,6 +770,8 @@ void resolveIssue(far UINT8* data)
 		break;
 
 	}
+
+
 
 }
 
