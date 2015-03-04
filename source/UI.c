@@ -356,6 +356,32 @@ void UI_task(void)
 				ui.state = UI_ISSUE;
 			}
 		}
+		else if( keypressed == '\x08')
+		{
+/*
+			if(ui.bufferIndex > 0 )
+			{
+				LCD_putChar(keypressed);
+				ui.bufferIndex--;
+				if( ui.inputIndex > 0 )
+					ui.inputIndex--;
+			}
+			else 
+			{
+*/
+			if(ui.bufferIndex == 0 )
+			{
+				IAS_getAcknowledgedIssue(&ackIssue);
+				if(ackIssue.ID != - 1)
+				{
+					showUImsg(ackIssue.tag);
+					clearUIBuffer();
+					clearUIInput();
+					ui.state= UI_ISSUE_RESOLVE;
+				}
+			}
+
+		}
 		else
 		{
 			ui.input[ui.inputIndex]  = '0';
@@ -549,20 +575,20 @@ void UI_task(void)
 
 		else if( keypressed == '0')
 		{
-			setUImsg(UI_MSG_STATION);
+			setUImsg(UI_MSG_ISSUE);
 			clearUIBuffer();
 			clearUIInput();
-			ui.state = UI_STATION;
+			ui.state = UI_ISSUE;
 		}
 
 		else if( keypressed == '\x0A')
 		{
 			IAS_resolveIssues(ackIssue.ID);   // 	IAS_resolveIssues( &ackIssue.ID); 
 			ackIssue.ID = -1;
-			setUImsg(UI_MSG_STATION);
+			setUImsg(UI_MSG_ISSUE);
 			clearUIBuffer();
 			clearUIInput();
-			ui.state = UI_STATION;
+			ui.state = UI_ISSUE;
 
 		}
 

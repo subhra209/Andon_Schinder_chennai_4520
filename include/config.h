@@ -27,7 +27,7 @@
 
 
 //LCD Configuration
-//#define TEST_LCD
+#define TEST_LCD
 
 
 //TOWER LAMP Configuration
@@ -36,7 +36,7 @@
 
 //KEYPAD Configuration
 
-#define INPUT_SIMULATION
+//#define INPUT_SIMULATION
 #define KEYPAD_BUFFER_LENGTH 	(20)
 //#define KEYPAD_TEST
 

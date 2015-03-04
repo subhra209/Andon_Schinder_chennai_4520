@@ -417,7 +417,7 @@ void IAS_getOpenIssue(far OpenIssue *openIssue)
 
 void IAS_getAcknowledgedIssue(far OpenIssue *openIssue)
 {
-	UINT8 i =openIssue->ID+1, j=0,k=0,l;
+	UINT8 i =openIssue->ID+1, j=0,k=1,l;
 
 	if( i >= MAX_ISSUES )
 		i = 0;
@@ -429,8 +429,8 @@ void IAS_getAcknowledgedIssue(far OpenIssue *openIssue)
 		i = i%MAX_ISSUES;
 		if( (ias.issues[i].state == ISSUE_RESOLVED) || (ias.issues[i].ackStatus == 1 ) )
 			continue;
-		openIssue->tag[j++] = 'S';openIssue->tag[j++] = 'T';openIssue->tag[j++] = 'N';openIssue->tag[j++] = ':';
-		openIssue->tag[j++] = ias.issues[i].data[k++];openIssue->tag[j++] =ias.issues[i].data[k++];openIssue->tag[j++] = ';';
+		openIssue->tag[j++] = 'I';openIssue->tag[j++] = 'S';openIssue->tag[j++] = 'S';openIssue->tag[j++] = 'U';openIssue->tag[j++] = 'E';openIssue->tag[j++] = ':';
+	//	openIssue->tag[j++] = ias.issues[i].data[k++];openIssue->tag[j++] =ias.issues[i].data[k++];openIssue->tag[j++] = ';';
 		
 		switch( ias.issues[i].data[k] )
 		{
@@ -448,13 +448,13 @@ void IAS_getAcknowledgedIssue(far OpenIssue *openIssue)
 				//openIssue->tag[j++] = ias.issues[i].data[3];openIssue->tag[j++] = ias.issues[i].data[4];
 				break;	
 			case '3':
-				openIssue->tag[j++]='#';
+			//	openIssue->tag[j++]='#';
+				openIssue->tag[j++] = 'M';openIssue->tag[j++] = 'A';openIssue->tag[j++] = 'T';openIssue->tag[j++] = 'E';openIssue->tag[j++] = 'R';openIssue->tag[j++] = 'I';
+				openIssue->tag[j++] = 'A';openIssue->tag[j++] = 'L';openIssue->tag[j++]= ';';
 				break;
-			case '4': 
-				openIssue->tag[j++] = 'O';openIssue->tag[j++]= 'T';openIssue->tag[j++]= 'H';openIssue->tag[j++]= 'E';openIssue->tag[j++]= 'R';openIssue->tag[j++]= 'S';
-				openIssue->tag[j++]= ';';
-				break;			
+			
 		}
+/*
 		++k;
 		while( ias.issues[i].data[k] !='\0')
 		{
@@ -463,6 +463,7 @@ void IAS_getAcknowledgedIssue(far OpenIssue *openIssue)
 			k++;
 		}
 		openIssue->tag[j] = '\0';
+*/
 		openIssue->ID = ias.openIssue = i;
 
 		break;
@@ -847,6 +848,10 @@ void IAS_acknowledgeIssues(UINT8 ID)
 	{
 		if( ias.issues[i].ackStatus == 1)
 			ias.issues[i].ackStatus = 0 ;
+	Write_b_eep((i*ISSUE_ENTRY_SIZE)+ISSUE_ACKSTATUS, ias.issues[i].ackStatus);
+	Busy_eep();
+	ClrWdt();
+
 			//return;
 	}
 	BUZZER = 0;
