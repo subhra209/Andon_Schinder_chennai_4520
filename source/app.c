@@ -481,12 +481,12 @@ void IAS_resolveIssues(UINT8 id)
 	far UINT8* data;
 
 
-								
+	/*							
 		if(ias.issues[id].state != ISSUE_RESOLVED )						//if it is raised
 			if(strcmp((INT8*)data,(INT8 *)ias.issues[id].data) == 0)		//if input matches
 				if(ias.issues[id].ackStatus == 1) 						//check whether acknowledged
 					return;												//if not return
-
+	*/
 	data = ias.issues[id].data;
 
 	switch(ias.state)
@@ -606,7 +606,7 @@ void IAS_raiseIssues(far UINT8* data)
 				if(ias.issues[i].ackStatus == 1) 						//check whether acknowledged
 					return;												//do nothing
 			*/
-					resolveIssue( *data);
+					IAS_resolveIssues(i);
 					return;
 			}
 
@@ -913,7 +913,7 @@ INT8 issueResolved(far UINT8* data)
 
 	for(i = 0; i < MAX_ISSUES; i++)
 	{
-		if(ias.issues[i].state != ISSUE_RESOLVED && (ias.issues[i].ackStatus != 1) )
+		if(ias.issues[i].state != ISSUE_RESOLVED) //&& (ias.issues[i].ackStatus != 1) )
 		{
 			if(strcmp((INT8*)data,(INT8 *)ias.issues[i].data) == 0)
 			{
@@ -924,9 +924,8 @@ INT8 issueResolved(far UINT8* data)
 
 				ias.issues[i].state = ISSUE_RESOLVED;
 				ias.issues[i].timeout = 0;
-				ias.issues[i].ackStatus = 0;
-			
-				
+			//	ias.issues[i].ackStatus = 0;
+		
 				return i;
 			}
 		}
