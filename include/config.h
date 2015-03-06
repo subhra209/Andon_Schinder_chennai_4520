@@ -7,16 +7,19 @@
 *
 */
 
+#define NO_OF_DIGITS 6
 
 
+#define DEVICE_ADDRESS			0xFA
 
-
-
-#define DEVICE_ADDRESS			(0xFA)
 
 //#define __FACTORY_CONFIGURATION__
 
+//#define TEST_LCD
 
+//DIGIT DISPLAY TEST
+#define __DISPLAY_TEST__
+#define __COMMON_CATHODE__
 
 //TIMER Configuration
 #define TIMESTAMP_DURATION 		(200)
@@ -25,27 +28,14 @@
 //USART Configuration
 #define ACTIVE_USARTS		1
 
+//#define __ADC_COUNT_DISPLAY__
 
-//LCD Configuration
-//#define TEST_LCD
-
-
-//TOWER LAMP Configuration
-//#define TOWER_LAMP_TEST
-
-
-//KEYPAD Configuration
-
-#define INPUT_SIMULATION
-#define KEYPAD_BUFFER_LENGTH 	(20)
-//#define KEYPAD_TEST
 
 //COM module configuration
 #define __BCC_XOR__
 #define __RESPONSE_ENABLED__
-//#define __UART_TEST__
 //#define __LOOP_BACK__
-#define BROADCAST_ADDRESS		0xFA
+#define BROADCAST_ADDRESS		0xFF
 #define CMD_SOP	0xAA
 #define CMD_EOP 0xBB
 #define RESP_SOP	0xCC
@@ -54,12 +44,25 @@
 
 enum
 {
-	RX_PACKET_SIZE = 50,
-	TX_PACKET_SIZE = 50
+	CMD_PACKET_SIZE = 30,
+	RESP_PACKET_SIZE = 30
 };
 
-#define 	RECEIVER_MAX_PAKET_SIZE		(RX_PACKET_SIZE)	
-#define 	TRANSMITTER_MAX_PAKET_SIZE	(TX_PACKET_SIZE)
+#define 	RX_PACKET_SIZE		(30)	
+#define 	TX_PACKET_SIZE		(30)
+
+
+/*
+*----------------------------------------
+*	Keypad Configurations
+*----------------------------------------
+*/
+//#define __FACTORY_CONFIGURATION__
+//#define __SIMULATION__
+
+
+#define MAX_MSG 7
+#define DISPLAY_REFRESH_PERIOD	2	//period of refresh in milliseconds
 
 
 
@@ -74,9 +77,6 @@ enum
 };
 
 
-// Enable for external eeprom access
-// Comment out this line if internal eeprom access required
-#define EEP_EXTERRNAL
 
 
 /*

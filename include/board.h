@@ -44,68 +44,67 @@
 *------------------------------------------------------------------------------
 */
 
-
 // Heart Beat 
-#define	HEART_BEAT				LATEbits.LATE2
-#define	HEART_BEAT_DIR			TRISEbits.TRISE2				
+#define		HEART_BEAT				LATEbits.LATE2
+#define		HEART_BEAT_DIR			TRISEbits.TRISE2				
 
 
-#define	KBD_COL5				PORTCbits.RC2
-#define	KBD_COL5_DIR			TRISCbits.TRISC2
-#define	KBD_COL4				PORTCbits.RC1
-#define	KBD_COL4_DIR			TRISCbits.TRISC1
-#define	KBD_COL3				PORTEbits.RE1
-#define	KBD_COL3_DIR			TRISEbits.TRISE1	
-#define	KBD_COL2				PORTEbits.RE0	
-#define	KBD_COL2_DIR			TRISEbits.TRISE0	
-#define	KBD_COL1				PORTAbits.RA5	
-#define	KBD_COL1_DIR			TRISAbits.TRISA5	
-#define	KBD_COL0				PORTAbits.RA4
-#define	KBD_COL0_DIR			TRISAbits.TRISA4
+#define		KBD_COL5				PORTCbits.RC2
+#define		KBD_COL5_DIR			TRISCbits.TRISC2
+#define		KBD_COL4				PORTCbits.RC1
+#define		KBD_COL4_DIR			TRISCbits.TRISC1
+#define		KBD_COL3				PORTEbits.RE1
+#define		KBD_COL3_DIR			TRISEbits.TRISE1	
+#define		KBD_COL2				PORTEbits.RE0	
+#define		KBD_COL2_DIR			TRISEbits.TRISE0	
+#define		KBD_COL1				PORTAbits.RA5	
+#define		KBD_COL1_DIR			TRISAbits.TRISA5	
+#define		KBD_COL0				PORTAbits.RA4
+#define		KBD_COL0_DIR			TRISAbits.TRISA4
 
-#define	KBD_ROW0				PORTBbits.RB2	
-#define	KBD_ROW0_DIR			TRISBbits.TRISB2	
-#define	KBD_ROW1				PORTAbits.RA1	
-#define	KBD_ROW1_DIR			TRISAbits.TRISA1	
-#define	KBD_ROW2				PORTAbits.RA2	
-#define	KBD_ROW2_DIR			TRISAbits.TRISA2	
-#define	KBD_ROW3				PORTAbits.RA3
-#define	KBD_ROW3_DIR			TRISAbits.TRISA3
+#define		KBD_ROW0				PORTBbits.RB2	
+#define		KBD_ROW0_DIR			TRISBbits.TRISB2	
+#define		KBD_ROW1				PORTAbits.RA1	
+#define		KBD_ROW1_DIR			TRISAbits.TRISA1	
+#define		KBD_ROW2				PORTAbits.RA2	
+#define		KBD_ROW2_DIR			TRISAbits.TRISA2	
+#define		KBD_ROW3				PORTAbits.RA3
+#define		KBD_ROW3_DIR			TRISAbits.TRISA3
 
 
 
 // LCD Association
-	#define		LCD_DAT4_PORT			LATD
-	
-	#define		LCD_D7					PORTDbits.RD7 			
-	#define		LCD_D7_DIR				TRISDbits.TRISD7
-	#define		LCD_D6					PORTDbits.RD6 			
-	#define		LCD_D6_DIR				TRISDbits.TRISD6
-	#define		LCD_D5					PORTDbits.RD5 			
-	#define		LCD_D5_DIR				TRISDbits.TRISD5
-	#define		LCD_D4					PORTDbits.RD4			
-	#define		LCD_D4_DIR				TRISDbits.TRISD4
-	#define		LCD_E					PORTDbits.RD1 			
-	#define		LCD_E_DIR				TRISDbits.TRISD1
-	#define		LCD_RW					PORTDbits.RD2 			
-	#define		LCD_RW_DIR				TRISDbits.TRISD2
-	#define		LCD_RS					PORTDbits.RD3		
-	#define		LCD_RS_DIR				TRISDbits.TRISD3
+#define		LCD_DAT4_PORT			LATD
+
+#define		LCD_D7					PORTDbits.RD7 			
+#define		LCD_D7_DIR				TRISDbits.TRISD7
+#define		LCD_D6					PORTDbits.RD6 			
+#define		LCD_D6_DIR				TRISDbits.TRISD6
+#define		LCD_D5					PORTDbits.RD5 			
+#define		LCD_D5_DIR				TRISDbits.TRISD5
+#define		LCD_D4					PORTDbits.RD4			
+#define		LCD_D4_DIR				TRISDbits.TRISD4
+#define		LCD_E					PORTDbits.RD1 			
+#define		LCD_E_DIR				TRISDbits.TRISD1
+#define		LCD_RW					PORTDbits.RD2 			
+#define		LCD_RW_DIR				TRISDbits.TRISD2
+#define		LCD_RS					PORTDbits.RD3		
+#define		LCD_RS_DIR				TRISDbits.TRISD3
 
 
 // Buzzer O/P
-#define	BUZZER					LATDbits.LATD0
-#define	BUZZER_DIR				TRISDbits.TRISD0	
+#define		BUZZER					LATDbits.LATD0
+#define		BUZZER_DIR				TRISDbits.TRISD0	
 
 
-#define LAMP_RED				LATBbits.LATB3
-#define LAMP_RED_DIR			TRISBbits.TRISB3
+#define 	LAMP_RED				LATBbits.LATB3
+#define 	LAMP_RED_DIR			TRISBbits.TRISB3
 
-#define LAMP_YELLOW				LATBbits.LATB4
-#define LAMP_YELLOW_DIR			TRISBbits.TRISB4
+#define 	LAMP_YELLOW				LATBbits.LATB4
+#define 	LAMP_YELLOW_DIR			TRISBbits.TRISB4
 
-#define LAMP_GREEN				LATBbits.LATB5
-#define LAMP_GREEN_DIR			TRISBbits.TRISB5
+#define 	LAMP_GREEN				LATBbits.LATB5
+#define 	LAMP_GREEN_DIR			TRISBbits.TRISB5
 
 
 // Rs485 / RS232 Serial commnunicaton port
@@ -114,9 +113,7 @@
 #define 	SER_TX					PORTCbits.RC6   		// serial transmit
 #define		SER_TX_DIR				TRISCbits.TRISC6
 #define 	SER_RX					PORTCbits.RC7			// serial receive
-#define		SER_RX_DIR				TRISCbits.TRISC7
-
-	
+#define		SER_RX_DIR				TRISCbits.TRISC7	
 /*
 *------------------------------------------------------------------------------
 * Public Defines

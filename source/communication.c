@@ -13,7 +13,7 @@ enum
 
 enum
 {
-	TIMEOUT = 250
+	TIMEOUT = 65535
 };
 
 typedef struct _COMMUNICATTION
@@ -36,12 +36,12 @@ typedef struct _COMMUNICATTION
 	UINT8 prevState ;
 }COMMUNICATION;
 
-#pragma idata COM_DATA
+#pragma idata com_data
 COMMUNICATION communication = {0};
 #pragma idata
 
 UINT16 comTimeout = 0xFFFF;
-
+UINT8 rom alert[]={"COM\n"};
 
 
 UINT8 COM_BCC( UINT8* data  , UINT8 length);
@@ -50,10 +50,12 @@ UINT8 parsePacket(UINT8 *respCode);
 void COM_reset(void);
 void COM_txData(void);
 UINT8 checksum(UINT8 *buffer, UINT8 length);
-void COM_restart(void);
 
 void COM_init(UINT8 rx_sop , UINT8 rx_eop ,UINT8 tx_sop , UINT8 tx_eop , UINT8 (*callBack)(UINT8* rxdata, UINT8* txCode,UINT8** txPacket))
 {
+	int i;
+//	UART_init( 62500 );	//initialize uart
+	
 
 	communication.rx_sop = rx_sop;
 	communication.rx_eop = rx_eop;
@@ -61,31 +63,18 @@ void COM_init(UINT8 rx_sop , UINT8 rx_eop ,UINT8 tx_sop , UINT8 tx_eop , UINT8 (
 	communication.tx_eop = tx_eop;
 	communication.callBack = callBack;
 
-	COM_restart();
+	COM_reset();
+	for(i = 0 ; i < 26; i++)
+	{
+		UART_write(i+'A');
+	}
+	UART_transmit();
+
 }
-
-void COM_restart()
-{
-
-	UART_init(62500);	//initialize uart
-
-
-	communication.rxPacketIndex = 0;
-	communication.txPacketLength = 0;
-	communication.state = COM_START;
-	communication.txCode = IGNORE;
-	communication.timeout = TIMEOUT;
-	communication.prevAppTime = communication.curAppTime;
-	communication.prevState = communication.state;
-}
-
-
-
 
 void COM_reset()
 {
-
-
+	UART_init( 62500 );
 	communication.rxPacketIndex = 0;
 	communication.txPacketLength = 0;
 	communication.state = COM_START;
@@ -99,7 +88,6 @@ void COM_reset()
 void COM_task()
 {
 	UINT8 uartData = 0;
-
 	if( UART_hasData() )
 	{
 		uartData = UART_read();	
@@ -110,60 +98,52 @@ void COM_task()
 
 	}
 
-
-
 }
 
 #else
 
 
-void COM_task(void)
+void COM_task()
 {
-	volatile UINT8 uartData = 0,i;
-	communication.curAppTime = GetAppTime();
-	if( communication.prevAppTime != communication.curAppTime)
+	UINT8 uartData = 0,i;
+	if( communication.prevState == communication.state 
+	&& (communication.state != COM_START) && communication.state!=
+	COM_IN_TX_DATA)
 	{
-		if( communication.prevState == communication.state && (communication.state == COM_IN_PACKET_COLLECTION))
+		--communication.timeout ;
+		if( communication.timeout == 0)
 		{
-			--communication.timeout ;
-			if( communication.timeout == 0)
-			{
-				COM_restart();
-				return;
-			}
-			
+			COM_reset();
+			return;
 		}
-		
-		communication.prevAppTime = communication.curAppTime;
+			
 	}
+		
+	else communication.timeout = TIMEOUT;
+	
 
-	switch( communication.state)
+	switch(communication.state)
 	{
 		case COM_START:
 
-			if( UART_hasData() == FALSE )
-				return;
-			uartData = UART_read();	
-
-			
+			if( UART_hasData())
+			{
+				uartData = UART_read();	
+			}
 
 			if( uartData == communication.rx_sop )
 			{
 				communication.rxPacketIndex = 0;
 				communication.state = COM_IN_PACKET_COLLECTION;
-				communication.timeout = TIMEOUT;
 			}
 		break;
 
 		case COM_IN_PACKET_COLLECTION:
-	
 
 			if( UART_hasData()==FALSE )
 				return;
+			communication.timeout = TIMEOUT;
 			uartData = UART_read();	
-
-			
-
 			if(uartData == communication.rx_eop )
 			{
 				UINT8 parseResult = 0;
@@ -172,7 +152,7 @@ void COM_task(void)
 				
 				parseResult = parsePacket(&txCode);		//parse packet 
 
-				switch( parseResult)
+				switch(parseResult)
 				{
 					case IGNORE:
 					COM_reset();	
@@ -213,8 +193,7 @@ void COM_task(void)
 						++communication.txPacketLength;
 						
 						communication.txPacketBuffer[COM_TX_CODE_INDEX] = communication.txCode;		//store tx code
-						++communication.txPacketLength;
-						
+						++communication.txPacketLength;						
 					}
 					
 					break;
@@ -227,7 +206,7 @@ void COM_task(void)
 			else
 			{
 				communication.rxPacketBuffer[communication.rxPacketIndex++]=uartData;
-				if( communication.rxPacketIndex >= RX_PACKET_SIZE)
+				if(communication.rxPacketIndex >= RX_PACKET_SIZE)
 				{
 					communication.txPacketBuffer[COM_DEVICE_ADDRESS_INDEX] = DEVICE_ADDRESS;	//store device address
 					++communication.txPacketLength;
@@ -258,12 +237,13 @@ void COM_task(void)
 
 }
 
-#endif		//__LOOP_BACK__
-
-
+#endif
 
 UINT8 parsePacket(UINT8 *respCode)
 {
+#ifdef __NO_CHECKSUM__
+		return PARSE_SUCCESS;
+#else 
 	UINT8 receivedChecksum = communication.rxPacketBuffer[communication.rxPacketIndex-1];
 	UINT8 genChecksum = 0;
 
@@ -279,23 +259,25 @@ UINT8 parsePacket(UINT8 *respCode)
 		--communication.rxPacketIndex;
 		communication.rxPacketBuffer[communication.rxPacketIndex] = '\0'; //remove checksum from packet
 	 
-		return SUCCESS;
+		return PARSE_SUCCESS;
 	}
 	else
 	{	
 		*respCode = COM_RESP_CHECKSUM_ERROR;
-	 	return FAILURE;
+	 	return PARSE_FAILURE;
 	}
+#endif 
 }
 
 
 void COM_txData()
 {
+
+#ifdef __RESPONSE_ENABLED__
 	UINT8 bcc = 0;
 	UINT8 i= 0;
 
 	bcc = checksum(communication.txPacketBuffer, communication.txPacketLength);
-
 	
 	UART_write(communication.tx_sop);
 
@@ -307,29 +289,21 @@ void COM_txData()
 	UART_write(bcc);
 	UART_write(communication.tx_eop);
 
-
-#ifdef __RESPONSE_ENABLED__
 	UART_transmit();
 #endif
 	ClrWdt();
-
-
 	
 }
 
 
 void COM_txStr(rom UINT8 *str)
 {
-
-
-
 	while(*str)
 	{
-		UART_write(*str);
-		str++;
+	UART_write(*str);
+	*str++;
 	}
 	UART_transmit();
-
 }
 
 

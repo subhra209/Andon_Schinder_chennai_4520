@@ -1,6 +1,5 @@
 #include "board.h"
 #include "timer.h"
-#include "uart_driver.h"
 
 
 
@@ -21,16 +20,16 @@ void high_interrupt (void)
 
 	if(INTCONbits.TMR0IF == 1)
 	{
-  		_asm GOTO TIMER0_ISR _endasm
+  		_asm GOTO TMR0_ISR _endasm
 	}
-
+/*
 	if( PIR1bits.RCIF == 1 )
 	{
 		_asm
 			goto UartReceiveHandler
 		_endasm
 	}
-
+*/
 
 }
 
@@ -49,7 +48,8 @@ void high_interrupt (void)
 void EnableInterrupts(void)
 {
 	// Enable interrupt priority
-  	RCONbits.IPEN = 1;
+  	//RCONbits.IPEN = 1;
  	// Enable all high priority interrupts
   	INTCONbits.GIEH = 1;
+	INTCONbits.GIEL = 1;
 }

@@ -20,12 +20,7 @@
 #include "board.h"				// board setup
 #include "timer.h"
 #include "heartbeat.h"
-#include "uart_driver.h"
-#include "communication.h"
-#include "app.h"
-#include "ui.h"
 #include "lcd.h"
-#include "keypad_driver.h"
 /*
 *------------------------------------------------------------------------------
 * Private Defines
@@ -88,6 +83,9 @@
 * Public Variables
 *------------------------------------------------------------------------------
 */
+extern UINT16 heartBeatCount;
+ extern UINT16 keypadUpdate_count;
+ extern UINT16 comUpdateCount;
 
 /*
 *------------------------------------------------------------------------------
@@ -155,8 +153,7 @@ void main(void)
 
 	LCD_init();
 	InitializeKeypad();
-
-	TIMER0_init(TICK_PERIOD,0);							//initialize timer0
+	TMR0_init(TICK_PERIOD,0);							//initialize timer0
 
 #ifdef TEST_LCD
 	for(i = 0 ; i< 26; i++)
@@ -164,12 +161,10 @@ void main(void)
 		LCD_putChar(i+'A');
 		DelayMs(200);
 	}
-	LCD_clear();
+//	LCD_clear();
 #endif
 
-
 	UI_init();			//MUST BE DONE AFTER IAS INIT
-
 	APP_init();
 
 	EnableInterrupts();
@@ -179,17 +174,18 @@ void main(void)
     {
 
 
-		if( heartBeatCount >= 25)
+		if( heartBeatCount >= 200)
 		{
 			HB_task();
 			heartBeatCount = 0;
 		}
 
-		if( keypadUpdateCount >= 3 )
+		if( keypadUpdate_count >= 3 )
 		{
 			UpdateKeypadTask();
-			keypadUpdateCount = 0;
+			keypadUpdate_count = 0;
 		}
+
 
 		COM_task();
 
@@ -197,16 +193,9 @@ void main(void)
 		APP_task();
 	
 	
-		UI_task();
-	
-	
-
-
-		ClrWdt();
+		UI_task();	 
 				
-    }	 
-				
-   
+    }
 }
 
 /*

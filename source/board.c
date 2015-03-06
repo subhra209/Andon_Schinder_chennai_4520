@@ -116,6 +116,8 @@ void BRD_init(void)
 	LCD_E_DIR  = PORT_OUT;
 	LCD_RW_DIR = PORT_OUT;
 	LCD_RS_DIR = PORT_OUT;
+
+
 	// Configure keypad input
 	KBD_ROW0_DIR = PORT_IN;
 	KBD_ROW1_DIR = PORT_IN;
@@ -129,19 +131,7 @@ void BRD_init(void)
 	KBD_COL5_DIR = PORT_OUT;
 
 
-	KBD_COL5 = 0;
-
-
-
-
-	// Rs485 Direction Control
-	TX_EN_DIR = PORT_OUT;
-	TX_EN = SWITCH_OFF;
-	SER_TX_DIR 		=  PORT_OUT;		// Configure Serial port
-	SER_RX_DIR 		=  PORT_IN;
-
-
-	
+	KBD_COL5 = 0;	
 	// Configure Buzzer output
 	BUZZER_DIR			= PORT_OUT;	
 	BUZZER 				= SWITCH_OFF;
@@ -154,8 +144,6 @@ void BRD_init(void)
 
 	LAMP_YELLOW_DIR		= PORT_OUT;
 	LAMP_YELLOW 		= SWITCH_OFF;
-	
-
 }
 
 

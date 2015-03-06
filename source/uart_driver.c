@@ -198,7 +198,7 @@ void UART_init( unsigned long baudRate )
 	baudRate = GetSystemClock() / baudRate;
 
 
-//	baudRate = 207;
+//	baudRate = 162;
 
 
 
@@ -230,15 +230,13 @@ void UART_init( unsigned long baudRate )
 // configure USART
 	OpenUSART( uartConfig , baudRate );
 
-// Enable interrupt priority
-  	RCONbits.IPEN = 1;
-	
+
 	TXSTAbits.TXEN = 1;	//enable transmission
 	TXSTAbits.CSRC = 0;
-//	IPR1bits.TXIP = 1;	//make transmit interrupt high priority
+	PIE1bits.RCIE = 1;
 
+	IPR1bits.TXIP = 1;	//make transmit interrupt high priority
 
-	INTCONbits.PEIE = 1;	//enable low priority interrupts
   	// Make receive interrupt high priority
   	IPR1bits.RCIP = 1;
 

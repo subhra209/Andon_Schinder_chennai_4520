@@ -2,7 +2,7 @@
 MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
 Version=1.0
 [File000]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\obj\board.o
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\obj\board.o
 Folder=Intermediary
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -15,7 +15,7 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG
 [File001]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\obj\heartBeat.o
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\obj\heartBeat.o
 Folder=Intermediary
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -28,7 +28,7 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG
 [File002]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\obj\interruptvector.o
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\obj\interruptvector.o
 Folder=Intermediary
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -41,7 +41,7 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG
 [File003]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\obj\lcd.o
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\obj\lcd.o
 Folder=Intermediary
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -54,7 +54,7 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG
 [File004]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\obj\main.o
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\obj\main.o
 Folder=Intermediary
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -67,7 +67,7 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG
 [File005]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\obj\timer.o
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\obj\timer.o
 Folder=Intermediary
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -80,7 +80,7 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG
 [File006]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\obj\UI.o
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\obj\UI.o
 Folder=Intermediary
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -93,7 +93,7 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG
 [File007]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\obj\app.o
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\obj\app.o
 Folder=Intermediary
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -106,7 +106,7 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG
 [File008]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\obj\communication.o
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\obj\communication.o
 Folder=Intermediary
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -119,7 +119,7 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG
 [File009]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\obj\uart_driver.o
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\obj\uart_driver.o
 Folder=Intermediary
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -132,7 +132,7 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG
 [File010]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\obj\keypad_driver.o
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\obj\keypad_driver.o
 Folder=Intermediary
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -145,7 +145,7 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG
 [File011]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\output\Scheider_4520_v2.cof
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\output\Scheider_4520_v2.cof
 Folder=Output
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -158,7 +158,7 @@ ToolArgsString=/o"$(BINDIR_)$(TARGETBASE).cof" /M"$(BINDIR_)$(TARGETBASE).map" /
 TraceCmdString=
 DebugOptions=/z__MPLAB_DEBUG=1
 [File012]
-Location=D:\IDEONICS\reposatory\Andon_Schinder_chennai_4520\output\Scheider_4520_v2.hex
+Location=D:\jo\Ideonics\Repository\Andon_Schinder_chennai_4520\output\Scheider_4520_v2.hex
 Folder=Output
 DeviceName=PIC18F4520
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}

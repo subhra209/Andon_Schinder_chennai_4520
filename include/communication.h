@@ -3,6 +3,7 @@
 #define __COMMUNICATION__
 
 #include "board.h"
+#include "typedefs.h"
 
 
 typedef enum
@@ -29,11 +30,7 @@ enum
 };
 
 
-enum
-{
-FAILURE,
-SUCCESS
-};
+
 
 enum 
 {
@@ -49,7 +46,7 @@ enum
 
 void COM_init(UINT8 cmd_sop , UINT8 cmd_eop ,UINT8 resp_sop , UINT8 resp_eop , UINT8 (*callBack)(UINT8* rxdata, UINT8* txCode,UINT8** txPacket));
 
-extern void COM_task(void);
+void COM_task(void);
 void COM_txStr(rom UINT8 *str);
 #endif
 
